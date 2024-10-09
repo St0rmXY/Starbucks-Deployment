@@ -1,10 +1,16 @@
 # Starbucks-Deployment
 
+
+
+
 # Install aws CLI
 sudo apt install unzip -y
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
+
+
+
 
 # Install Jenkins on ubuntu
 #!/bin/bash
@@ -20,6 +26,9 @@ sudo apt-get update -y
 sudo apt-get install jenkins -y
 sudo systemctl start jenkins
 sudo systemctl status jenkins
+
+
+
 
 # Install Docker on Ubuntu
 # Add Docker's official GPG key:
@@ -40,6 +49,9 @@ sudo chmod 777 /var/run/docker.sock
 newgrp docker
 sudo systemctl status docker
 
+
+
+
 # Install Trivy on Ubuntu
 sudo apt-get install wget apt-transport-https gnupg
 wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
@@ -47,9 +59,15 @@ echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.
 sudo apt-get update
 sudo apt-get install trivy
 
+
+
+
 # Install Docker Scout
 docker login       `Give Dockerhub credentials here`
 curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin
+
+
+
 
 # Deployment stages
 Git checkout ->  Sonarqube Analysis -> Quality Gate -> OWASP FS SCAN -> Trivy File Scan -> Build Docker Image -> Tag and Push to Dockerhub -> Docker scout Image -> Deploy to container
